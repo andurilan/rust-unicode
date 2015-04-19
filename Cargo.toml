@@ -1,0 +1,10 @@
+[package]
+name = "unicode"
+version = "0.1.0"
+authors = [
+    "Fenhl <fenhl@fenhl.net>"
+]
+
+[lib]
+name = "unicode"
+path = "src/lib.rs"
