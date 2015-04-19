@@ -4,5 +4,5 @@
 /// An owned sequence of Unicode scalar values, equivalent to `String`.
 pub struct UString(Vec<char>);
 
-/// A Unicode string slice, equivalent to `&str`.
-pub struct UStr<'a>(&'a [char]);
+/// A Unicode string slice, equivalent to `str`.
+pub struct UStr([char]);
