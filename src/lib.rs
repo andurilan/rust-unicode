@@ -13,7 +13,7 @@ pub struct UString(Vec<char>);
 /// A Unicode string slice, equivalent to `str`.
 pub struct UStr([char]);
 
-impl UString {
+impl UStr {
     /// Returns the number of Unicode scalar values in this string.
     pub fn len(&self) -> usize {
         self.0.len()
