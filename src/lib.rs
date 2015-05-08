@@ -66,6 +66,12 @@ impl Deref for UString {
     }
 }
 
+impl From<String> for UString {
+    fn from(string: String) -> UString {
+        UString(string.chars().collect())
+    }
+}
+
 impl From<Vec<char>> for UString {
     fn from(chars: Vec<char>) -> UString {
         UString(chars)
