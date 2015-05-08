@@ -14,6 +14,12 @@ pub struct UString(Vec<char>);
 /// A Unicode string slice, equivalent to `str`.
 pub struct UStr([char]);
 
+impl UString {
+    pub fn remove(&mut self, idx: usize) -> char {
+        self.0.remove(idx)
+    }
+}
+
 impl UStr {
     /// Returns the number of Unicode scalar values in this string.
     pub fn len(&self) -> usize {
