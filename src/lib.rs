@@ -2,6 +2,7 @@
 #![forbid(unused_variables)]
 
 use std::{fmt, mem};
+use std::borrow::{Borrow, ToOwned};
 use std::default::Default;
 use std::hash::{Hash, Hasher};
 use std::ops::{Deref, Index, Range, RangeFrom, RangeFull, RangeTo};
@@ -20,6 +21,12 @@ impl UStr {
     }
 }
 
+impl Borrow<UStr> for UString {
+    fn borrow(&self) -> &UStr {
+        &self
+    }
+}
+
 impl Default for UString {
     fn default() -> UString {
         UString(Vec::new())
@@ -35,6 +42,12 @@ impl Deref for UString {
             // just so you can be clear what it is:
             //mem::transmute::<&[char], &UStr>(&*self.0)
         }
+    }
+}
+
+impl From<Vec<char>> for UString {
+    fn from(chars: Vec<char>) -> UString {
+        UString(chars)
     }
 }
 
@@ -93,6 +106,14 @@ impl Index<RangeTo<usize>> for UStr {
 
     fn index(&self, idx: RangeTo<usize>) -> &UStr {
         unsafe { mem::transmute(&self.0[idx]) }
+    }
+}
+
+impl ToOwned for UStr {
+    type Owned = UString;
+
+    fn to_owned(&self) -> UString {
+        UString::from(self.0.to_owned())
     }
 }
 
