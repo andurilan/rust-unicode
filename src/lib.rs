@@ -19,6 +19,21 @@ impl UStr {
     pub fn len(&self) -> usize {
         self.0.len()
     }
+
+    /// Retrieves the first character from a `&UStr` and returns it.
+    ///
+    /// This does not allocate a new string; instead, it returns a slice that points one character beyond the character that was shifted.
+    ///
+    /// If the slice does not contain any characters, None is returned instead.
+    pub fn slice_shift_char(&self) -> Option<(char, &UStr)> {
+        if self.len() == 0 {
+            None
+        } else {
+            let ch = self[0];
+            let next_s = &self[1..];
+            Some((ch, next_s))
+        }
+    }
 }
 
 impl Borrow<UStr> for UString {
