@@ -5,6 +5,7 @@ use std::{fmt, mem};
 use std::borrow::{Borrow, ToOwned};
 use std::default::Default;
 use std::hash::{Hash, Hasher};
+use std::iter::FromIterator;
 use std::ops::{Deref, Index, Range, RangeFrom, RangeFull, RangeTo};
 
 /// An owned sequence of Unicode scalar values, equivalent to `String`.
@@ -87,6 +88,12 @@ impl<'a> From<&'a str> for UString {
 impl<'a> From<&'a [char]> for UString {
     fn from(slice: &[char]) -> UString {
         UString(slice.to_vec())
+    }
+}
+
+impl<C: Into<char>> FromIterator<C> for UString {
+    fn from_iter<T>(iterator: T) -> UString where T: IntoIterator<Item=C> {
+        UString(iterator.into_iter().map(C::into).collect())
     }
 }
 
