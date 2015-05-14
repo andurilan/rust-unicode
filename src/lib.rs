@@ -159,3 +159,60 @@ impl fmt::Display for UStr {
         Ok(())
     }
 }
+
+pub struct Iter<'a>(&'a [char]);
+
+pub struct IntoIter(Vec<char>);
+
+impl<'a> Iterator for Iter<'a> {
+    type Item = &'a char;
+
+    fn next(&mut self) -> Option<&'a char> {
+        if self.0.len() > 0 {
+            let result = &self.0[0];
+            self.0 = &self.0[1..];
+            Some(result)
+        } else {
+            None
+        }
+    }
+}
+
+impl Iterator for IntoIter {
+    type Item = char;
+
+    fn next(&mut self) -> Option<char> {
+        if self.0.len() > 0 {
+            Some(self.0.remove(0))
+        } else {
+            None
+        }
+    }
+}
+
+impl IntoIterator for UString {
+    type Item = char;
+    type IntoIter = IntoIter;
+
+    fn into_iter(self) -> IntoIter {
+        IntoIter(self.0)
+    }
+}
+
+impl<'a> IntoIterator for &'a UString {
+    type Item = &'a char;
+    type IntoIter = Iter<'a>;
+
+    fn into_iter(self) -> Iter<'a> {
+        Iter(&self.0)
+    }
+}
+
+impl<'a> IntoIterator for &'a UStr {
+    type Item = &'a char;
+    type IntoIter = Iter<'a>;
+
+    fn into_iter(self) -> Iter<'a> {
+        Iter(&self.0)
+    }
+}
