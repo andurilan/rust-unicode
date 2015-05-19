@@ -91,6 +91,18 @@ impl<'a> From<&'a [char]> for UString {
     }
 }
 
+impl From<UString> for String {
+    fn from(string: UString) -> String {
+        String::from_iter(string)
+    }
+}
+
+impl<'a> From<&'a UStr> for String {
+    fn from(slice: &UStr) -> String {
+        String::from_iter(slice.into_iter().cloned())
+    }
+}
+
 impl<C: Into<char>> FromIterator<C> for UString {
     fn from_iter<T>(iterator: T) -> UString where T: IntoIterator<Item=C> {
         UString(iterator.into_iter().map(C::into).collect())
