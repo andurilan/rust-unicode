@@ -97,6 +97,12 @@ impl From<UString> for String {
     }
 }
 
+impl<'a> From<&'a UString> for String {
+    fn from(string: &UString) -> String {
+        String::from_iter(string.into_iter().cloned())
+    }
+}
+
 impl<'a> From<&'a UStr> for String {
     fn from(slice: &UStr) -> String {
         String::from_iter(slice.into_iter().cloned())
