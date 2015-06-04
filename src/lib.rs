@@ -178,8 +178,10 @@ impl fmt::Display for UStr {
     }
 }
 
+#[derive(Debug)]
 pub struct Iter<'a>(&'a [char]);
 
+#[derive(Debug)]
 pub struct IntoIter(Vec<char>);
 
 impl<'a> Iterator for Iter<'a> {
