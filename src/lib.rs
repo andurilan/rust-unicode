@@ -41,6 +41,14 @@ impl UStr {
             Some((ch, next_s))
         }
     }
+
+    pub fn starts_with<'a, T: AsRef<UStr>>(&self, prefix: &'a T) -> bool {
+        self.0.starts_with(&prefix.as_ref().0)
+    }
+
+    pub fn ends_with<'a, T: AsRef<UStr>>(&self, suffix: &'a T) -> bool {
+        self.0.ends_with(&suffix.as_ref().0)
+    }
 }
 
 impl Borrow<UStr> for UString {
@@ -88,6 +96,12 @@ impl<'a> From<&'a str> for UString {
 impl<'a> From<&'a [char]> for UString {
     fn from(slice: &[char]) -> UString {
         UString(slice.to_vec())
+    }
+}
+
+impl From<char> for UString {
+    fn from(c: char) -> UString {
+        UString(vec![c])
     }
 }
 
