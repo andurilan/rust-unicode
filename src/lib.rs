@@ -16,6 +16,11 @@ pub struct UString(Vec<char>);
 pub struct UStr([char]);
 
 impl UString {
+    /// Appends a character to the end of the string.
+    pub fn push(&mut self, c: char) {
+        self.0.push(c);
+    }
+
     pub fn remove(&mut self, idx: usize) -> char {
         self.0.remove(idx)
     }
