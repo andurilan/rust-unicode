@@ -56,6 +56,12 @@ impl UStr {
     }
 }
 
+impl AsRef<UStr> for UString {
+    fn as_ref(&self) -> &UStr {
+        &self
+    }
+}
+
 impl Borrow<UStr> for UString {
     fn borrow(&self) -> &UStr {
         &self
