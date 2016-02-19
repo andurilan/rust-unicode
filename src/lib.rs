@@ -13,7 +13,7 @@ use std::ops::{Deref, Index, Range, RangeFrom, RangeFull, RangeTo};
 pub struct UString(Vec<char>);
 
 /// A Unicode string slice, equivalent to `str`.
-#[derive(PartialEq, Eq)]
+#[derive(PartialEq, Eq, Hash)]
 pub struct UStr([char]);
 
 impl UString {
